@@ -3,7 +3,7 @@ name: Deploy Workflow
 on:
   push:
     branches:
-      - main
+      - *
 
 jobs:
   documentation:
@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: SAST
-        uses: github/codeql-action/analyze@v1
+        uses: github/codeql-action/analyze@v2
         with:
           languages: python
           # include any additional queries you want to run
@@ -40,11 +40,11 @@ jobs:
             - 'python/codeql-py-security-extended.qls'
           # set the path to your code
           # for example: 'src/**'
-          search-path: '.'
+          search-path: 'src/**'
         env:
           # set your CodeQL Analysis key
           # for more information see https://docs.github.com/en/code-security/codeql/automating-code-scanning-with-github-actions/codeql-bundle-locations-for-github-hosted-runners#using-automatically-generated-keys
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deployment:
     runs-on: ubuntu-latest
