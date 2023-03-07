@@ -20,6 +20,7 @@ jobs:
           python -m pip install -e .
       - name: Build Documentation
         run: |
+          source aws/bin/activate
           cd docs
           make html
       - name: Deploy Documentation
