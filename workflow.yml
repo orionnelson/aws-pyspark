@@ -3,7 +3,7 @@ name: Deploy Workflow
 on:
   push:
     branches:
-      - *
+      - main
 
 jobs:
   documentation:
@@ -21,10 +21,9 @@ jobs:
           cd docs
           make html
       - name: Deploy Documentation
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./docs/build/html
+          folder: /docs/build/html # The folder the action should deploy.
 
   security:
     runs-on: ubuntu-latest
@@ -41,10 +40,6 @@ jobs:
           # set the path to your code
           # for example: 'src/**'
           search-path: 'src/**'
-        env:
-          # set your CodeQL Analysis key
-          # for more information see https://docs.github.com/en/code-security/codeql/automating-code-scanning-with-github-actions/codeql-bundle-locations-for-github-hosted-runners#using-automatically-generated-keys
-          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deployment:
     runs-on: ubuntu-latest
