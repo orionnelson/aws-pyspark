@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name= "aws-pyspark"
+authors= [{name="Orion", email="orion@allenfort.ca"},{name="Kashyap", email="kashyap@allenfort.ca"}]
+
+dependencies = [
+'importlib-metadata; python_version == "3.9"',
+'pyspark>=3.1.2',
+]
+dynamic=["version","description"]
+[tool.setuptools.packages]
+find = {}
+[project.optional-dependencies]
+doc=[
+    "sphinx~=4.5.0",
+    "myst-parser",
+    "furo",
+    "nbsphinx",
+]
