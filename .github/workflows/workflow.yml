@@ -27,6 +27,7 @@ jobs:
           source aws/bin/activate
           cd docs
           make html
+          echo "I dislike Github Pages" >> build/.nojekyll
       - name: Deploy Documentation
         uses: JamesIves/github-pages-deploy-action@v4
         with:
