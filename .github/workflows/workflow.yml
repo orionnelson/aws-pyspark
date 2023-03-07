@@ -15,7 +15,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install make
-          python -m pip install -e . --user
+          python -m venv aws
+          source aws/bin/activate
+          python -m pip install -e .
       - name: Build Documentation
         run: |
           cd docs
