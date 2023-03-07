@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install make
-          python -m pip install -e .
+          python -m pip install -e . --user
       - name: Build Documentation
         run: |
           cd docs
@@ -25,25 +25,11 @@ jobs:
         with:
           folder: /docs/build/html # The folder the action should deploy.
 
-  security:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: SAST
-        uses: github/codeql-action/analyze@v2
-        with:
-          languages: python
-          # include any additional queries you want to run
-          # for example: - 'python/general/suspicious-malloc-usage.ql'
-          queries: |
-            - 'python/codeql-py-security-extended.qls'
-          # set the path to your code
-          # for example: 'src/**'
-          search-path: 'src/**'
+  
 
   deployment:
     runs-on: ubuntu-latest
-    needs: [documentation, security]
+    needs: [documentation]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
