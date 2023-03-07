@@ -18,9 +18,9 @@ jobs:
           python -m venv aws
           source aws/bin/activate
           python -m pip install -e .
+          python -m pip install -e .[doc]
       - name: Build Documentation
         run: |
-          source aws/bin/activate
           cd docs
           make html
       - name: Deploy Documentation
